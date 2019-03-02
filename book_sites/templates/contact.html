@@ -1,0 +1,53 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block title %}
+Just Read|關於我們
+{% endblock %}
+    {% block container %}
+    <section id="team">
+        <div class="container">
+            <div class="text-area text-center">
+                <h2>About Team</h2>
+                <hr>
+            </div>
+
+            <div class="team">
+                <div class="row text-center">
+
+                    <div class="col-md-3">
+                        <img class="img-circle" src="{% static "img/profile/chialing.jpg" %}" alt="" height="140px" width= "140px">
+                        <div class="description">
+                            <h3 class="big-text">洪嘉翎</h3>
+                            <p class="small-text">高雄第一科技大學資訊管理系，藉由製作專題接觸自己感興趣的領域，期勉自己透過努力創造一個美好未來。－The best way to predict the future is to invent it.</p>
+                        </div> 
+                    </div>
+
+                    <div class="col-md-3">
+                        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                        <div class="description">
+                            <h3 class="big-text">李皓理</h3>
+                            <p class="small-text">來自台南的表面害羞其實瘋瘋的天然黑女孩，出身是台南高商國貿科，轉來資訊管理系希望學到更多東西，以應對未來各多方面的事情。</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                        <div class="description">
+                            <h3 class="big-text">張潔瑩</h3>
+                            <p class="small-text">一個在閒暇時間喜歡看書的女孩，來自具有多元民族文化的馬來西亞。希望透過學習資訊管理系來跟進科技時代的腳步來面對未來更多的事物。</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+                        <div class="description">
+                            <h3 class="big-text">陳虹瑩</h3>
+                            <p class="small-text">為了夢想而飄洋過海來到臺灣的印尼女孩！把夢想從無到有，在臺灣的這三年裡學會了陌生的語言與領域。</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}

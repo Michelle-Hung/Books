@@ -1,0 +1,161 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% comment %}
+{% block title %}
+Just Read|{{book.name}}
+{% endblock %}
+{% endcomment %}
+
+{% block container %}
+    <!-- Page Content -->
+    <section>
+        <div class="container">
+          <div class="row">
+            <!-- Post Content Column -->
+
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <br>
+                        <img class="img-responsive center-block cloudzoom" src="{{book.photo_url}}" width="200" height="200" alt="{{book.name}}" data-cloudzoom = "zoomImage: '{{book.photo_zoom}}'">
+                    </div>
+                    <div class="col-sm-8">
+                        <h2><b>{{book.name}}</b></h2>
+                        <p class="text-muted">作者：{{book.author}}
+                        <br>譯者：{{book.translator}}
+                        <br>出版日：{{book.publish_date}}
+                        <br>評分 : {{book.score}}
+                        
+                        <!-- AddToAny BEGIN -->
+                        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_button_twitter"></a>
+                        <a class="a2a_button_line"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                        </div>
+                        <script>
+                        var a2a_config = a2a_config || {};
+                        a2a_config.linkname = '{{book.name}}';
+                        a2a_config.locale = "zh-TW";
+                        </script>
+                        <script async src="https://static.addtoany.com/menu/page.js"></script>
+                        <!-- AddToAny END -->
+                        </p>
+                    </div>
+                </div>
+                <hr>
+             
+              <!-- Post Content -->
+              <div>
+                  <div class="text-area">
+                    <h3><b>書籍介紹</b></h3>
+                  </div>
+                  <font size="2"><h4><b>《{{book.name}}》</b></h4><br>
+                    {{book.synopsis}}
+                  </font>
+
+                  <!--<blockquote class="blockquote">
+                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in
+                      <cite title="Source Title">Source Title</cite>
+                    </footer>
+                  </blockquote>-->
+              </div>
+              <br>
+              <!-- Comments Form -->
+              <h3><b>書籍評論</b></h3>
+              <div class="well">
+                 
+                    <form method="post" action="{% url 'add_rating' book.id %}" class="form-group">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </form>
+               </div>
+               <br>
+              <!-- Single Comment -->
+              <div>
+                  <!-- Posted Comments -->
+                    {% if error_message %}<p style="color:#F05F40"><strong>{{ error_message }}</strong></p>{% endif %}
+                    
+                    {% for rate in rating %}
+                    <!-- Comment -->
+                    <div class="media">
+                        {% for u in pic %}
+                            {% ifequal rate.user_id u.user_id  %}
+                                {% if not u.image %}
+                                    <a class="pull-left" href="{% url 'profile' rate.user_id %}">
+                                        <img class="media-object" src="{% static "img/default.png" %}" width="64" height="64" alt="u.urser">
+                                    </a>
+                                {% else %}
+                                    <a class="pull-left" href="{% url 'profile' rate.user_id %}">
+                                        <img class="media-object" src="/media/{{u.image}}" width="64" height="64" alt="u.user">
+                                    </a>
+                                {% endif %}
+                            {% endifequal %}
+                        {% endfor %}
+                        <div class="media-body">
+                            <h4 class="media-heading">{{rate.user}}
+                                <small>{{rate.pub_date}}</small>
+                            </h4>
+                            {{rate.comment}}
+                        </div>
+                            <a href="{% url 'commentLikes' book.id rate.id %}"><img id=like src="{% static 'img/like.png' %}" alt="Like"></a> {{rate.likes}}
+                    </div>
+                    {% endfor %}
+               </div><!-- row(comment) -->
+            </div><!-- row(outside) -->
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-sm-4">
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>目錄</h4>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                {% for catalog in c %}
+                                <li><a href="{% url 'catalog' catalog.id %}">{{catalog.catalog}}</a></li>
+                                
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% comment %}
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled">
+                                <li><a href="/cookbooks">食譜書籍</a>
+                                </li>
+                                <li><a href="/religion">宗教信仰</a>
+                                </li>
+                                <li><a href="/travel">旅遊書籍</a>
+                                </li>
+                                <li><a href="/computer">資訊電腦</a>
+                                </li>
+                                <li><a href="/psychology">心理學</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>可能喜歡</h4>
+                    {% for rmdbooks in rmd_books%}
+                        <a href="{% url 'book_detail' rmdbooks.id %}"><img class="img-responsive center-block" width="100" height="100" src = "{{rmdbooks.photo_url}}" alt="{{rmdbooks.name}}"></a>
+                        <font><center>{{rmdbooks.name}}</center></font><br>
+                    {% endfor %}
+                    
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block container %}
+<div class="container">
+	<div class="text-area text-center">
+		<h2>修改</h2>
+		<hr>	
+	</div>
+	<div class="row">
+		<form method="post" action="" class="form-group" enctype="multipart/form-data">
+		{% csrf_token %}
+        {{ pForm.as_p }}
+        <button type="submit" class="btn btn-primary">儲存</button>
+        </form>
+	</div>
+
+
+
+</div>
+
+
+
+
+{% endblock %}

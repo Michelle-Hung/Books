@@ -1,0 +1,84 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block container %}
+<div class="container">
+	<div class="text-area text-center">
+		<h2>基本資料</h2>
+		<hr>	
+	</div>
+	<div class="row">
+		<p align="right"><a href="{% url 'editProfile'  %}">修改基本資料</a> ‧ <a href="{% url 'password_change' %}">修改密碼</a></p>
+
+		<div class="col-sm-4">
+			
+			{% if not userP.image %}
+				<img class="img-thumbnail" src="{% static "img/default.png" %}" width="200px" alt="pic">
+			{% else %}
+				<img class="img-thumbnail" src="{{userP.image.url}}" width="250px" alt="pic">
+			{% endif %}
+			
+
+		</div>
+		<div class="col-sm-8">
+			<p>名稱:{{userP.user}}</p>
+			<p>性別:{{userP.gender}}</p>
+			<p>生日:{{userP.birth_day}}</p>
+			<p>國家/城市:{{userP.location}}</p>
+			<p>關於我:{{userP.bio}}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="text-area">
+        	<h3><b>{{userP.user}}留言過的書本</b></h3>
+        	<hr>
+        </div>
+        <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">書本</th>
+		      <th scope="col">留言</th>
+		      <th scope="col">時間</th>
+		      <th scope="col">讚</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for rate in rating %}
+		    <tr>
+		      <th scope="row"></th>
+		      <td>{{rate.book}}</td>
+		      <td>{{rate.comment}}</td>
+		      <td>{{rate.pub_date}}</td>
+		      <td>{{rate.likes}}</td>
+		    </tr>
+		    {% endfor %}
+		   </tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="text-area">
+        	<h3><b>{{userP.user}}喜歡哪些留言</b></h3>
+        	<hr>
+        </div>
+        <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">用戶</th>
+		      
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for like in likeRating %}
+		    <tr>
+		      <th scope="row"></th>
+		      <td>{{like.comment}}</td>
+		      
+		    </tr>
+		    {%　endfor %}
+		   </tbody>
+		</table>
+	</div>
+	
+</div>
+{% endblock %}

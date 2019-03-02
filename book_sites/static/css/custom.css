@@ -1,0 +1,25 @@
+body{
+	font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
+}
+.text-area{
+	padding: 4.375em 0;
+    position: relative;
+    z-index: 3;
+    display: block;
+}
+.description{
+	padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.big-text{
+	font-size: 18px;
+    line-height: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+.small-text{
+	color: #777777;
+    text-align: center;
+}

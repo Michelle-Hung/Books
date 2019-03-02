@@ -1,0 +1,26 @@
+{% extends 'base2.html' %}
+{% block container %}
+
+<div class="container">
+	<div class="text-area text-center">
+		<h1>登入</h1>
+		<hr>
+	</div>
+
+	
+	<form method="post" action="{% url 'auth_login'  %}" class="form-group text-center" >
+		{% csrf_token %}
+		{{form.as_table}}
+		<br><br><button type="submit" class="btn btn-primary">登入</button>
+		<!--<a class="btn btn-primary" href="{% url 'auth_login'  %}">登入</a>-->
+		
+		<br><a href='/accounts/register/'><font size="2">想加入我們嗎?</font></a> 
+		<a href="{% url 'auth_password_reset' %}">忘記密碼</a>
+		
+	</form>
+	
+</div>
+
+
+
+{% endblock %}

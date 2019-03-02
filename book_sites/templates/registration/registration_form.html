@@ -1,0 +1,18 @@
+{% extends 'base2.html' %}
+
+
+{% block container %}
+<div class="container">
+	<div class="text-area text-center">
+    	<h1>註冊</h1>
+		<hr>
+	</div>
+	<div class="text-area">
+	<form method="post" class="form" action="{% url 'registration_register'  %}">
+    	{% csrf_token %}
+    	{{form.as_p}}
+    	<button type="submit" class="btn btn-primary">Register</button>
+	</form>
+	</div>
+</div>
+{% endblock %}

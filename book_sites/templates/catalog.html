@@ -1,0 +1,23 @@
+{% extends 'base2.html' %}
+{% load static %}
+	{% block container %}
+	<div class="container">
+      <div class="text-area text-center">
+        <h2>{{c.catalog}}</h2>
+        <hr>
+      </div>
+      <!-- Three columns of text below the carousel -->
+      <div class="row" align="center">
+        {% for book in books %}
+        <div class="col-sm-4 " style="width: 33%;height: 250px">
+          <a href="{% url 'book_detail' book.id %}"><img class="img-responsive" src="{{book.photo_url}}" alt="{{book.name}}" width="130" height="150" ></a>
+          <p><font size="3"><b>{{book.name}}</b></font><br>
+            <font size="3" class="text-muted">{{book.author}} 著</font><br>
+            <font size="2">評分：{{book.score}}</font>
+          </p>
+        </div>
+        {% endfor %}
+        
+      </div><!-- /.row -->
+  	</div>
+	{% endblock %}
